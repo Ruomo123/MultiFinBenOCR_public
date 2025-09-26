@@ -27,5 +27,5 @@ def main():
 
 # Dataset
 - Dataset are available on HuggingFace:
-   - English, Spanish, Japanese, Greek raw pdf, images, and OCR of  [TheFinAI/OCR_Task] (https://huggingface.co/datasets/TheFinAI/OCR_Task)
+   - English, Spanish, Japanese, Greek raw pdf, images, and OCR of  [TheFinAI/OCR_Task](https://huggingface.co/datasets/TheFinAI/OCR_Task)
    - Spanish raw pdf and images [TheFinAI/MultiFinBen_OCR_Task](https://huggingface.co/datasets/TheFinAI/MultiFinBen_OCR_Task)
