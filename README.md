@@ -12,15 +12,16 @@ def main():
     evaluate(model_name="gpt-4o",language = "en", sample = 20)
 ```
 
-3. After running main.py, run bar_plot.py to both output evaluation metrics (BLEU and BERTScore), and plot corresponding violin plots. 
+3. After running main.py, run main/evaluation.py to both output evaluation metrics (BLEU and BERTScore), and plot corresponding violin plots. 
 To control input output path, or change models, csv names etc., please update this part:
 ```
 def main():
-    run_eval_and_plot(
-        parquet_path="hyr_ocr_process/spanish_output_parquet/spanish_batch_0000.parquet",
-        pred_dir="hyr_results/predictions_spanish/gpt-4o_zero-shot_financial",
+    run_rouge_eval(
+        parquet_path="hyr_ocr_process/japanese_output_parquet/japanese_batch_0000.parquet",
+        pred_dir="hyr_results/predictions_japanese/gpt-4o_zero-shot_financial",
         model_name="gpt-4o",
-        output_csv="hyr_results/eval_spanish_gpt_4o.csv"
+        lang = "jp",
+        output_csv="hyr_results/eval_rouge/eval_japanese_gpt_4o_rouge.csv"
     )
 ```
 
