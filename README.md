@@ -9,7 +9,7 @@ Repo for MultiFinBen OCR task
 The model is default to be gpt-4o, and language default to be English. If want to change languagr or model, or only run model on small sample, update this part:
 ```
 def main():
-    evaluate(model_name="gpt-4o",language = "en", sample = 20)
+    evaluate(model_name="gpt-4o",language = "en",local_version = False , sample = 20)
 ```
 
 3. After running main.py, run main/evaluation.py to both output evaluation metrics (BLEU and BERTScore), and plot corresponding violin plots. 
@@ -26,6 +26,6 @@ def main():
 ```
 
 # Dataset
-- Dataset are available on HuggingFace:
-   - English, Spanish, Japanese, Greek raw pdf, images, and OCR of  [TheFinAI/OCR_Task](https://huggingface.co/datasets/TheFinAI/OCR_Task)
-   - Spanish raw pdf and images [TheFinAI/MultiFinBen_OCR_Task](https://huggingface.co/datasets/TheFinAI/MultiFinBen_OCR_Task)
+- Dataset are available on HuggingFace:[TheFinAI/OCR_Task](https://huggingface.co/datasets/TheFinAI/OCR_Task)
+   - OCR_DATA/base64_encoded_version： use datasets in this folder when set local_version = False in main.py
+   - OCR_DATA/local_file_version: use datasets in this folder when set local_version = True in main.py
