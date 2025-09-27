@@ -21,10 +21,10 @@ def evaluate_rouge(pred_dir, ground_truths, model_name="gpt-4o",lang = 'en'):
         with open(pred_path, "r", encoding="utf-8") as f:
             pred = f.read().strip()
             clean_pred = pred
-            if lang != "es":
-                import re
-                clean_pred = re.sub(r"<[^>]+>", " ", pred)
-                clean_pred = re.sub(r"\s+", " ", clean_pred).strip()
+            # if lang != "es":
+            #     import re
+            #     clean_pred = re.sub(r"<[^>]+>", " ", pred)
+            #     clean_pred = re.sub(r"\s+", " ", clean_pred).strip()
 
 
         try:
@@ -92,4 +92,5 @@ def main():
     )
 
 if __name__ == '__main__':
+
     main()
