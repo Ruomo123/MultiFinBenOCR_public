@@ -5,19 +5,33 @@ from tqdm import tqdm
 import os
 import time
 
-def evaluate(model_name="gpt-4o", experiment_tag="zero-shot",language = "en", sample = None):
+def evaluate(model_name="gpt-4o", experiment_tag="zero-shot",language = "en", local_version = True, sample = None):
     tools = Tools()
 
     if language == "en":
-        # df = pd.read_parquet("hyr_ocr_process/output_parquet_hyr/EnglishOCR.parquet") # comment out if using TheFinAI/MultiFinBen-EnglishOCR
-        ds_en = load_dataset("TheFinAI/MultiFinBen-EnglishOCR") # use this line only if using TheFinAI/MultiFinBen-EnglishOCR
-        df = ds_en['train'].to_pandas() # use this line only if using TheFinAI/MultiFinBen-EnglishOCR
+        if local_version:
+            df = pd.read_parquet("hyr_ocr_process/output_parquet_hyr/EnglishOCR.parquet") # comment out if using TheFinAI/MultiFinBen-EnglishOCR
+        else:
+            ds_en = load_dataset("TheFinAI/OCR_Task", data_files = ["OCR_DATA/base64_encoded_version/EnglishOCR_3000_000.parquet"]) # use this line only if using TheFinAI/MultiFinBen-EnglishOCR 
+            df = ds_en['train'].to_pandas() # use this line only if using TheFinAI/MultiFinBen-EnglishOCR
     elif language == "es":
-        df = pd.read_parquet("hyr_ocr_process/spanish_output_parquet/spanish_batch_0000.parquet")
+        if local_version:
+            df = pd.read_parquet("hyr_ocr_process/spanish_output_parquet/spanish_batch_0000.parquet")
+        else:
+            ds_es = load_dataset("TheFinAI/OCR_Task", data_files = ["OCR_DATA/base64_encoded_version/SpanishOCR_3000_000.parquet"])
+            df = ds_es['train'].to_pandas()
     elif language == "gr":
-        df = pd.read_parquet("hyr_ocr_process/greek_output_parquet/GreekOCR_500.parquet") #GreekOCR_500 have same structure as TheFinAI/MultiFinBen-EnglishOCR; GreekOCR_v1 has same structure as  output_parquet_hyr/EnglishOCR.parquet
+        if local_version:
+            df = pd.read_parquet("hyr_ocr_process/greek_output_parquet/GreekOCR_v1.parquet") #GreekOCR_500 have same structure as TheFinAI/MultiFinBen-EnglishOCR; GreekOCR_v1 has same structure as  output_parquet_hyr/EnglishOCR.parquet
+        else:
+            ds_gr = load_dataset("TheFinAI/OCR_Task", data_files = ["OCR_DATA/base64_encoded_version/GreekOCR_full_000.parquet"])
+            df = ds_gr['train'].to_pandas()
     elif language == "jp":
-        df = pd.read_parquet("hyr_ocr_process/japanese_output_parquet/japanese_batch_0000.parquet")
+        if local_version:
+            df = pd.read_parquet("hyr_ocr_process/japanese_output_parquet/japanese_batch_0000.parquet")
+        else:
+            ds_jp = load_dataset("TheFinAI/OCR_Task", data_files = ["OCR_DATA/base64_encoded_version/JapaneseOCR_full_000.parquet"])
+            df = ds_jp['train'].to_pandas()
     else: 
         print("Not a valid choice of language, please try again.")
         return language
